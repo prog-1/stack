@@ -10,7 +10,7 @@ arguments being operated on.
 For example, the following RPN expression will produce the sum of 2 and 3,
 namely 5: 2 3 +.
 
-Write a function `func rpn(expr []string) int that evaluates the value of an
+Write a function `func rpn(expr []string) int` that evaluates the value of an
 expression in RPN defined by `[]string` type. Each string may be an integer
 or an operator. Valid operators are +, -, *, /.
 
