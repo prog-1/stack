@@ -14,6 +14,8 @@ Write a function `func rpn(expr []string) int` that evaluates the value of an
 expression in RPN defined by `[]string` type. Each string may be an integer
 or an operator. Valid operators are +, -, *, /.
 
+> NOTE: Assume the input is always correct.
+
 ### Example 1
 
 ```
@@ -89,4 +91,62 @@ Output: "/"
 ```
 Input: "/foo/./bar/../../baz/"
 Output: "/baz"
+```
+
+## Exercise 3
+
+https://en.wikipedia.org/wiki/Polish_notation
+
+Polish notation (PN), also known as normal Polish notation (NPN), Łukasiewicz
+notation, Warsaw notation, Polish prefix notation or simply prefix notation, is
+a mathematical notation in which operators precede their operands, in contrast
+to the more common infix notation, in which operators are placed between
+operands, as well as reverse Polish notation (RPN). It does not need any
+parentheses as long as each operator has a fixed number of operands.
+
+Lisp and related programming languages define their entire syntax in prefix
+notation (and others use postfix notation).
+
+For example, the following NPN expression will produce the sum of 2 and 3,
+namely 5: `+ 2 3`.
+
+Write a function `func npn(expr []string) int` that evaluates the value of an
+expression in NPN defined by `[]string` type. Each string may be an integer
+or an operator. Valid operators are +, -, *, /.
+
+> NOTE: Assume the input is always correct.
+
+### Examples
+
+```
+Input: []string{"*", "+", "3", "4", "2"}
+Output: 14
+
+* : () * ()
++ : (() + ()) * ()
+3 : ((3) + ()) * ()
+4 : ((3) + (4)) * ()
+2 : ((3) + (4)) * (2)
+```
+
+```
+Input: []string{"*", "2", "+", "3", "4"}
+Output: 14
+
+* : () * ()
+2 : (2) * ()
++ : (2) * (() + ())
+3 : (2) * ((3) + ())
+4 : (2) * ((3) + (4))
+```
+
+```
+Input: []string{"+", "4", "/", "11", "3"}
+Output: 7
+
++  : () + ()
+4  : (4) + ()
+/  : (4) + (() / ())
+11 : (4) + ((11) / ())
+3  : (4) + ((11) / (3))
 ```
