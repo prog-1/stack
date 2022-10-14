@@ -117,7 +117,18 @@ When implementing this assignment, follow the following rules:
 * Input slice elements must be used in the same order. Treat the input slice
   as a console or tape input.
 
+> HINT: Go through the examples below and notice that recursive evaluator could
+> handle two cases:
+> 
+> 1) Numbers are returned as is.
+> 2) Operators recursively invoke the evaluator to obtain both arguments and
+>    return the result.
 ### Examples
+
+```
+Input: []string{"123"}
+Output: 123
+```
 
 ```
 Input: []string{"*", "+", "3", "4", "2"}
