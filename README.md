@@ -16,46 +16,39 @@ or an operator. Valid operators are +, -, *, /.
 
 > NOTE: Assume the input is always correct.
 
-### Example 1
+When implementing this assignment, follow the following rules:
+
+* You cannot use recursion.
+* Input slice elements must be used in the same order. Treat the input slice
+  as a console or tape input.
+* Your solution must use software stack for storing input numbers. The stack
+  must be implemented using `[]int`. You can use slice tricks for the standard
+  stack operations like `pop` and `push`.
+* It is allowed to access only the top element of the stack directly.
+
+### Examples
 
 ```
 Input: []string{"3", "4", "+", "2", "*"}
 Output: 14
+
+3 : [3]
+4 : [3 4]
++ : [7]
+2 : [7 2]
+* : [14]
 ```
-
-#### Explanation
-
-Starting from backside
-
-```
-* : () * ()
-2 : () * (2)
-+ : (() + ()) * (2)
-4 : (() + (4)) * (2)
-3 : ((3) + (4)) * (2)
-((3) + (4)) * (2) = 14
-```
-
-### Example 2
 
 ```
 Input: []string{"4", "11", "3", "/", "+"}
 Output: 7
+
+4  : [4]
+11 : [4 11]
+3  : [4 11 3]
+/  : [4 3]       # Integer division 11 / 3 = 3.
++  : [7]
 ```
-
-#### Explanation
-
-Starting from backside
-
-```
-+ : () + ()
-/ : () + (() / ())
-3 : () + (() / (3))
-11 : () + ((11) / (3))
-4 : (4) + ((11) / (3))
-(4) + ((11) / (3)) = 7
-```
-
 
 ## Exercise 2
 
@@ -115,6 +108,12 @@ expression in NPN defined by `[]string` type. Each string may be an integer
 or an operator. Valid operators are +, -, *, /.
 
 > NOTE: Assume the input is always correct.
+
+When implementing this assignment, follow the following rules:
+
+* Your solution must NOT use any software stacks.
+* Input slice elements must be used in the same order. Treat the input slice
+  as a console or tape input.
 
 ### Examples
 
