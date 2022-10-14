@@ -121,8 +121,8 @@ When implementing this assignment, follow the following rules:
 > handle two cases:
 > 
 > 1) Numbers are returned as is.
-> 2) Operators recursively invoke the evaluator to obtain both arguments and
->    return the result.
+> 2) Operators recursively invoke the evaluator to obtain both arguments (operands)
+>    and return the result.
 ### Examples
 
 ```
