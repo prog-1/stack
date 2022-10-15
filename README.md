@@ -86,6 +86,14 @@ Output: "/"
 ```
 Input: "/foo/./bar/../../baz/"
 Output: "/baz"
+
+/foo : /foo
+.    : /foo
+/bar : /foo/bar
+..   : /foo
+..   : /
+/baz : /baz
+/    : /baz
 ```
 
 ## Exercise 3
