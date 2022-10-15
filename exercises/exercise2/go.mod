@@ -1,3 +1,3 @@
-module ex2
+module ex1
 
 go 1.19

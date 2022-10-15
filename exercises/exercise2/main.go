@@ -2,45 +2,37 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"strings"
 )
 
-// Caclulates expression that uses Normal Polish Notation
-func npn(expr []string) int {
-	if len(expr) == 0 || expr == nil {
-		return 0
-	}
-	var pn func(expr []string) (int, []string)
-	pn = func(expr []string) (int, []string) {
-		switch expr[0] {
-		case "+":
-			a, ne1 := pn(expr[1:])
-			b, ne2 := pn(ne1[1:])
-			return a + b, ne2
-		case "-":
-			a, ne1 := pn(expr[1:])
-			b, ne2 := pn(ne1[1:])
-			return a - b, ne2
-		case "*":
-			a, ne1 := pn(expr[1:])
-			b, ne2 := pn(ne1[1:])
-			return a * b, ne2
-		case "/":
-			a, ne1 := pn(expr[1:])
-			b, ne2 := pn(ne1[1:])
-			return a / b, ne2
-		default: // Number
-			val, _ := strconv.Atoi(expr[0])
-			return val, expr
+// Simplifies path
+func simplify(path string) string {
+	var dirs []string
+	path = strings.Trim(path, "/")
+	for _, el := range strings.Split(path, "/") {
+		switch el {
+		case ".": // Breaks from switch
+		case "":
+		case "..":
+			if len(dirs) > 0 {
+				dirs = dirs[:len(dirs)-1] // Pop
+			}
+		default: // Dir name
+			dirs = append(dirs, el)
 		}
 	}
 
-	val, _ := pn(expr)
-	return val
+	var result string
+	for _, dir := range dirs {
+		result += "/" + dir
+	}
+	if result == "" {
+		return "/"
+	}
+	return result
 }
 
 func main() {
-	//expr := []string{"+", "4", "/", "11", "3"}
-	var expr []string = nil
-	fmt.Println(npn(expr))
+	path := "/../"
+	fmt.Println(simplify(path))
 }

@@ -1,24 +1,26 @@
 package main
 
 import (
+	"reflect"
 	"testing"
 )
 
-func TestNPN(t *testing.T) {
+func TestSimplify(t *testing.T) {
 	for _, tc := range []struct {
 		name  string
-		input []string
-		want  int
+		input string
+		want  string
 	}{
-		{"nil", nil, 0},
-		{"empty", []string{}, 0},
-		{"1", []string{"123"}, 123},
-		{"2", []string{"*", "+", "3", "4", "2"}, 14},
-		{"3", []string{"+", "4", "/", "11", "3"}, 7},
+		{"Empty", "", "/"},
+		{"//", "//", "/"},
+		{"Funny", "/foo/./bar/../../baz/", "/baz"},
+		{"Not funny", "/../", "/"},
+		{"Home", "/home/", "/home"},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
-			if got := npn(tc.input); got != tc.want {
-				t.Errorf("got = %v, want = %v", got, tc.want)
+			got := simplify(tc.input)
+			if !reflect.DeepEqual(got, tc.want) {
+				t.Errorf("got = %v want = %v", got, tc.want)
 			}
 		})
 	}
