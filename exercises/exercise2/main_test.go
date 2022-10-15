@@ -10,6 +10,8 @@ func TestNPN(t *testing.T) {
 		input []string
 		want  int
 	}{
+		{"nil", nil, 0},
+		{"empty", []string{}, 0},
 		{"1", []string{"123"}, 123},
 		{"2", []string{"*", "+", "3", "4", "2"}, 14},
 		{"3", []string{"+", "4", "/", "11", "3"}, 7},

@@ -7,7 +7,9 @@ import (
 
 // Caclulates expression that uses Normal Polish Notation
 func npn(expr []string) int {
-
+	if len(expr) == 0 || expr == nil {
+		return 0
+	}
 	var pn func(expr []string) (int, []string)
 	pn = func(expr []string) (int, []string) {
 		switch expr[0] {
@@ -38,6 +40,7 @@ func npn(expr []string) int {
 }
 
 func main() {
-	expr := []string{"+", "4", "/", "11", "3"}
+	//expr := []string{"+", "4", "/", "11", "3"}
+	var expr []string = nil
 	fmt.Println(npn(expr))
 }

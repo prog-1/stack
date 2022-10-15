@@ -11,6 +11,8 @@ func TestSimplify(t *testing.T) {
 		input string
 		want  string
 	}{
+		{"Empty", "", "/"},
+		{"//", "//", "/"},
 		{"Funny", "/foo/./bar/../../baz/", "/baz"},
 		{"Not funny", "/../", "/"},
 		{"Home", "/home/", "/home"},
