@@ -91,7 +91,7 @@ Output: "/baz"
 .    : /foo
 /bar : /foo/bar
 ..   : /foo
-..   :
+..   : /
 /baz : /baz
 /    : /baz
 ```
