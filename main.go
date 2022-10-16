@@ -29,7 +29,6 @@ func rpn(expr []string) int {
 		default:
 			stack = append(stack, atoi(v))
 		}
-		fmt.Println(stack)
 	}
 	return stack[0]
 }
@@ -54,6 +53,26 @@ func simplify(dir string) string {
 	return "/" + strings.Join(path, "/")
 }
 
+/*
+	func npn(in string) (success bool, num int, operation string) {
+		if len(in) == 0 {
+			return false, 0, ""
+		}
+		suc, num, opoperation := npn(in[1:])
+		switch v {
+		case "+":
+			stack = append(stack[:len(stack)-2], stack[len(stack)-2]+stack[len(stack)-1])
+		case "-":
+			stack = append(stack[:len(stack)-2], stack[len(stack)-2]-stack[len(stack)-1])
+		case "/":
+			stack = append(stack[:len(stack)-2], stack[len(stack)-2]/stack[len(stack)-1])
+		case "*":
+			stack = append(stack[:len(stack)-2], stack[len(stack)-2]*stack[len(stack)-1])
+		default:
+			stack = append(stack, atoi(v))
+		}
+	}
+*/
 func main() {
 	fmt.Println(simplify("/foo/./bar/../../baz/"))
 }
