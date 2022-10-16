@@ -17,3 +17,18 @@ func TestRpn(t *testing.T) {
 		}
 	}
 }
+
+func TestSimplify(t *testing.T) {
+	for _, tc := range []struct {
+		input string
+		want  string
+	}{
+		{"/home/./richard/./Desktop/../Downloads", "/home/richard/Downloads"},
+		{"/home/./richard/.//Desktop/../Downloads", "/home/richard/Downloads"},
+		{"/../Downloads//articles", "/Downloads/articles"},
+	} {
+		if got := simplify(tc.input); got != tc.want {
+			t.Errorf("rpn(%v) = %v, want = %v", tc.input, got, tc.want)
+		}
+	}
+}
