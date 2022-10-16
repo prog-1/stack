@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 func atoi(str string) int {
@@ -33,6 +34,26 @@ func rpn(expr []string) int {
 	return stack[0]
 }
 
+func simplify(dir string) string {
+	a := strings.Split(dir, "/")
+	var path []string
+	for _, v := range a {
+		switch v {
+		case ".":
+			continue
+		case "":
+			continue
+		case "..":
+			if len(path) != 0 {
+				path = path[:len(path)-1]
+			}
+		default:
+			path = append(path, v)
+		}
+	}
+	return "/" + strings.Join(path, "/")
+}
+
 func main() {
-	fmt.Println(rpn([]string{"3", "4", "+", "2", "*"}))
+	fmt.Println(simplify("/foo/./bar/../../baz/"))
 }
