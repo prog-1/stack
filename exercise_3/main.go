@@ -12,21 +12,28 @@ var operators = map[string]func(a, b int) int{
 	"/": func(a, b int) int { return a / b },
 }
 
-func doOpeartions(expr []string, index int, currentResult int) int {
-	if index <= 0 {
-		return currentResult
+func doOperations(expr []string) (newExpr []string, result int) {
+	if len(expr) == 0 {
+		return
 	}
-	opr := operators[expr[index-1]]
-	x, _ := strconv.Atoi(expr[index])
-	return doOpeartions(expr, index-2, opr(x, currentResult))
+	if opr, ok := operators[expr[0]]; ok {
+		newExpr, a := doOperations(expr[1:]) // first operand
+		_, b := doOperations(newExpr[1:])    // second operand
+		return newExpr[1:], opr(a, b)
+	} else {
+		result, _ = strconv.Atoi(expr[0])
+		return expr, result
+	}
 }
 
-func npn(expr []string) (result int) {
-	currentResult, _ := strconv.Atoi(expr[len(expr)-1])
-	return doOpeartions(expr, len(expr)-2, currentResult)
+func npn(expr []string) int {
+	_, result := doOperations(expr)
+	return result
 }
 
 func main() {
-	fmt.Println(npn([]string{"*", "2", "+", "2", "2"}))
-	fmt.Println(npn([]string{"+", "1", "+", "2", "3"}))
+	fmt.Println(npn([]string{"123"}))
+	fmt.Println(npn([]string{"*", "+", "3", "4", "2"}))
+	fmt.Println(npn([]string{"+", "*", "+", "3", "4", "2", "3"}))
+	fmt.Println(npn([]string{"+", "2", "*", "2", "2"}))
 }

@@ -16,7 +16,10 @@ func TestNpn(t *testing.T) {
 		{[]string{"+", "2", "*", "2", "2"}, 6},
 		{[]string{"*", "2", "+", "2", "2"}, 8},
 		{[]string{"+", "1", "+", "2", "3"}, 6},
+		{[]string{"*", "2", "+", "3", "4"}, 14},
 		{[]string{"+", "4", "/", "11", "3"}, 7},
+		{[]string{"*", "+", "3", "4", "2"}, 14},
+		{[]string{"+", "*", "+", "3", "4", "2", "3"}, 17},
 	} {
 		t.Run(fmt.Sprint(tc.input), func(t *testing.T) {
 			if got := npn(tc.input); got != tc.want {
