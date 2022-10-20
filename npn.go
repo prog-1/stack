@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func main() {
+func mainnpn() {
 	fmt.Println(npn([]string{"/", "*", "+", "3", "4", "7", "49"}))
 }
 
