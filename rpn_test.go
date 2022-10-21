@@ -53,7 +53,7 @@ func TestRPN(t *testing.T) {
 	}
 }
 
-func main() {
+func mainRPN() {
 	testing.Main(
 		/* matchString */ func(a, b string) (bool, error) { return a == b, nil },
 		/* tests */ []testing.InternalTest{
