@@ -1,49 +1,34 @@
 package main
 
 import (
-	"fmt"
+	"strings"
 )
 
-func makeroot(root []string, tmp string) ([]string, string) {
-	switch tmp {
-	case ".":
-	case "..":
-		if len(root) > 0 {
-			root = root[:len(root)-1]
+func simplify(s string) string {
+	a := strings.Split(s, "/")
+	var path []string
+	var res string
+	for _, v := range a {
+		switch v {
+		case ".":
+			continue
+		case "":
+			continue
+		case "..":
+			if len(path) != 0 {
+				path = path[:len(path)-1]
+			}
+		default:
+			path = append(path, v)
 		}
-	default:
-		root = append(root, tmp)
-
 	}
-	return root, ""
-}
-func connect(s []string) (res string) {
-	if len(s) == 0 {
+	for _, v := range path {
+		res += "/" + v
+	}
+	if res == "" {
 		return "/"
 	}
-	for _, v := range s {
-		fmt.Println(res)
-		res += "/"
-		fmt.Println(res)
-		res += v
-	}
 	return res
-}
-func path(s string) string {
-	var root []string
-	var tmp string
-	for _, v := range s {
-		if v == '/' {
-			root, tmp = makeroot(root, tmp)
-			continue
-		}
-		tmp += string(v)
-	}
-	if len(root) > 0 {
-		root = root[1:]
-	}
-	return connect(root)
-
 }
 func main() {
 

@@ -7,13 +7,12 @@ func TestPath(t *testing.T) {
 		n    string
 		want string
 	}{
-
 		{"/home/", "/home"},
 		{"/../", "/"},
 		{"/foo/./bar/../../baz/", "/baz"},
-		{"/foo/./bar/../../baz/boo/", "/baz/boo"},
-		{"/foo/./bar/baz/boo/../../../../../../", "/"},
-		{"/foo/./bar/../../baz/././././../boo/", "/boo"},
+		{"/home/./foo/../../baz/bar/", "/baz/bar"},
+		{"/home/bar/baz/boo/../../../../", "/"},
+		{"/home/./foo/../../bar/baz/./././../", "/bar"},
 	} {
 		if got := simplify(tc.n); got != tc.want {
 			t.Errorf("path(%v) = %v, want = %v", tc.n, got, tc.want)
